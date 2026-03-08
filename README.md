@@ -1,46 +1,50 @@
 # 🎵 Altai Music Downloader - Kullanım Kılavuzu
 
-Bu program, YouTube videolarını en yüksek kalitede ses dosyalarına (MP3, WAV, FLAC, M4A) dönüştüren profesyonel bir araçtır. **Sanal Altai Squad Topluluğu** için geliştirilmiştir.
+Bu program, YouTube videolarını en yüksek kalitede ses dosyalarına (MP3, WAV, FLAC, M4A) dönüştüren **tamamen bağımsız (standalone)** profesyonel bir araçtır. Altai Squad topluluğu için "tıkla-çalıştır" mantığıyla geliştirilmiştir.
 
 ---
 
-## 🚀 1. Adımda Çalıştırın
+## 🚀 Adım Adım Kullanım Rehberi
 
-Eğer bir yazılımcı değilseniz ve sadece müzik indirmek istiyorsanız:
+Bilgisayarınıza hiçbir şey kurmanıza gerek yoktur. Sadece şu adımları izleyin:
 
-1.  `dist` klasörünün içindeki **`altaysound-bot.exe`** dosyasına çift tıklayın.
-2.  Ekranınızda siyah bir pencere açılacak ve ardından tarayıcınızda (Chrome, Edge vb.) otomatik olarak görsel bir panel açılacaktır.
-3.  YouTube linkini kutucuğa yapıştırın, formatınızı seçin ve **"İndirmeyi Başlat"** butonuna basın.
+### 1. Programı Çalıştırın
+`dist` klasörü içindeki **`altaysound-bot.exe`** dosyasına çift tıklayın. Siyah bir komut penceresi açılacak ve ardından tarayıcınızda (Chrome, Edge vb.) kontrol paneli otomatik olarak belirecektir.
+
+### 2. Dosyaların Hazırlanması (Sadece İlk Seferde)
+Programı ilk kez çalıştırdığınızda, yanına otomatik olarak şu dosyalar çıkartılacaktır:
+*   `ffmpeg.exe` ve `ffprobe.exe`: Dönüştürme işlemleri için.
+*   `yt-dlp.exe`: İndirme işlemleri için.
+**Önemli:** Bu dosyaları silmeyin, programın çalışması için gereklidirler.
+
+### 3. Müziğinizi İndirin
+*   YouTube linkini kutucuğa yapıştırın.
+*   İstediğiniz ses formatını (MP3, WAV, FLAC vb.) seçin.
+*   **"İndirmeyi Başlat"** butonuna basın.
 
 ---
 
-## 🛠 2. İlk Çalıştırmada Bilmeniz Gerekenler
+## 🛠 Bilmeniz Gereken Önemli Noktalar
 
-*   **FFmpeg Kurulumu:** Programı ilk kez çalıştırdığınızda, yanına otomatik olarak `ffmpeg.exe` adında bir dosya çıkaracaktır. Bu dosya dönüşüm işlemleri için gereklidir, lütfen silmeyin.
 *   **İndirme Konumu:** İndirdiğiniz tüm müzikler, **`.exe` dosyasını nereye koyduysanız doğrudan o klasöre** kaydedilir.
-*   **Bağımsız Çalışma:** Bu sürümde Python veya başka bir araç kurmanıza gerek yoktur. Her şey `.exe` içine gömülmüştür.
-
----
-
-## 💎 Özellikler
-
-*   **Çoklu Format Desteği:** MP3 (Genel), WAV (Kayıpsız), FLAC (Stüdyo Kalitesi), M4A (Apple).
-*   **Modern Arayüz:** Tek tıkla kolay kullanım.
-*   **Playlist Desteği:** Sadece tek bir video değil, tüm bir listeyi otomatik indirebilirsiniz.
-*   **Hız:** YouTube sunucularından en yüksek hızda veri çeker.
+*   **Bağımsız Çalışma:** Bu program Python, Java veya başka bir ek yazılım gerektirmez. Her şey tek bir paketin içindedir.
+*   **Formatlar:** 
+    *   **MP3:** Her cihazda çalışır.
+    *   **FLAC:** En yüksek (stüdyo) kalitedir.
+    *   **WAV:** Kayıpsız ses formatıdır.
 
 ---
 
 ## ❓ Sıkça Sorulan Sorular (FAQ)
 
-**S: "Hata kodu: 1" alıyorum, neden?**
-C: Bilgisayarınızda Python yüklü olmayabilir veya YouTube linki hatalı olabilir.
+**S: Program açılıyor ama indirme başlamıyor?**
+C: YouTube linkinin doğru olduğundan ve internet bağlantınızın olduğundan emin olun.
 
-**S: Müzikler neden `.webm` olarak kalıyor?**
-C: Klasördeki `ffmpeg.exe` dosyasının silinmediğinden emin olun. Program bu dosya yardımıyla müzikleri MP3'e dönüştürür.
+**S: Dosyalar neden `.webm` olarak kalıyor?**
+C: Klasördeki `ffmpeg.exe` ve `ffprobe.exe` dosyalarının silinmediğinden emin olun. Eğer silindiyse programı kapatıp tekrar açın, otomatik olarak yeniden oluşacaklardır.
 
 **S: Bu program güvenli mi?**
-C: Evet, tamamen açık kaynaklıdır ve sadece belirttiğiniz linkten veri indirir.
+C: Evet, tamamen açık kaynaklıdır ve sadece belirttiğiniz linkten veri indirir. Virüs uyarısı alırsanız "Yine de çalıştır" diyebilirsiniz (imzasız uygulama olduğu için Windows uyarı verebilir).
 
 ---
 
