@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Altai Music Downloader - Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-card">
+        <header>
+            <div class="logo">
+                <i class="fas fa-headphones-alt"></i>
+            </div>
+            <h1>Altai Music</h1>
+            <p>Premium YouTube Audio Downloader</p>
+        </header>
+
+        <section class="download-form">
+            <div class="input-wrapper">
+                <i class="fab fa-youtube"></i>
+                <input type="text" id="urlInput" placeholder="YouTube linkini buraya yapıştırın..." autocomplete="off">
+            </div>
+
+            <div class="options-wrapper">
+                <div class="option-group">
+                    <label>Ses Formatı</label>
+                    <select id="formatSelect">
+                        <option value="mp3">MP3 (Evrensel)</option>
+                        <option value="wav">WAV (Kayıpsız)</option>
+                        <option value="flac">FLAC (Vip Kalite)</option>
+                        <option value="m4a">M4A (Apple)</option>
+                    </select>
+                </div>
+            </div>
+
+            <button id="downloadBtn">
+                <span class="btn-text">İndirmeyi Başlat</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </section>
+
+        <section id="statusArea" class="hidden">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="percentText">0%</span>
+                    <span id="statusLabel">Hazırlanıyor...</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progressBar" class="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="log-viewer">
+                <div class="log-header">
+                    <span>İşlem Günlüğü</span>
+                    <i class="fas fa-terminal"></i>
+                </div>
+                <div id="logBody" class="log-body"></div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2026 Altai Squad Community</p>
+        </footer>
+    </main>
+
+    <script>
+        const downloadBtn = document.getElementById('downloadBtn');
+        const urlInput = document.getElementById('urlInput');
+        const formatSelect = document.getElementById('formatSelect');
+        const statusArea = document.getElementById('statusArea');
+        const progressBar = document.getElementById('progressBar');
+        const percentText = document.getElementById('percentText');
+        const statusLabel = document.getElementById('statusLabel');
+        const logBody = document.getElementById('logBody');
+
+        function addLog(msg, type = 'info') {
+            const div = document.createElement('div');
+            div.className = `log-line ${type}`;
+            div.innerHTML = `<span class="timestamp">${new Date().toLocaleTimeString()}</span> ${msg}`;
+            logBody.prepend(div);
+        }
+
+        downloadBtn.addEventListener('click', async () => {
+            const url = urlInput.value.trim();
+            const format = formatSelect.value;
+
+            if (!url) {
+                urlInput.classList.add('shake');
+                setTimeout(() => urlInput.classList.remove('shake'), 500);
+                return;
+            }
+
+            downloadBtn.disabled = true;
+            downloadBtn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> İşleniyor...';
+
+            statusArea.classList.remove('hidden');
+            logBody.innerHTML = '';
+            progressBar.style.width = '0%';
+            percentText.innerText = '0%';
+            statusLabel.innerText = 'İstek gönderiliyor...';
+
+            try {
+                const response = await fetch('/download', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ url, format })
+                });
+
+                if (!response.ok) throw new Error('Sunucu bağlantısı koptu!');
+
+                const reader = response.body.getReader();
+                const decoder = new TextDecoder();
+
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+
+                    const chunk = decoder.decode(value);
+                    const lines = chunk.split('\n');
+
+                    for (const line of lines) {
+                        if (!line) continue;
+                        try {
+                            const data = JSON.parse(line);
+                            if (data.type === 'progress') {
+                                progressBar.style.width = data.percent + '%';
+                                percentText.innerText = Math.round(data.percent) + '%';
+                                statusLabel.innerText = 'Veriler indiriliyor...';
+                            } else if (data.type === 'log') {
+                                addLog(data.message);
+                            } else if (data.type === 'success') {
+                                addLog('İndirme ve dönüştürme başarıyla tamamlandı!', 'success');
+                                statusLabel.innerText = 'Tamamlandı!';
+                                progressBar.style.width = '100%';
+                                percentText.innerText = '100%';
+                                resetUI();
+                            } else if (data.type === 'error') {
+                                addLog(data.message, 'error');
+                                statusLabel.innerText = 'Hata oluştu!';
+                                resetUI();
+                            }
+                        } catch (e) { }
+                    }
+                }
+            } catch (err) {
+                addLog(err.message, 'error');
+                resetUI();
+            }
+        });
+
+        function resetUI() {
+            downloadBtn.disabled = false;
+            downloadBtn.innerHTML = '<span class="btn-text">Yeni İndirme</span> <i class="fas fa-arrow-right"></i>';
+        }
+    </script>
+</body>
+
+</html>
