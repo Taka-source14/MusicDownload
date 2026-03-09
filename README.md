@@ -4,7 +4,15 @@ Bu program, YouTube videolarını en yüksek kalitede ses dosyalarına (MP3, WAV
 
 ---
 
-## 🚀 Adım Adım Kullanım Rehberi
+## � Hemen İndir
+
+Programı kullanmak için hiçbir şey kurmanıza gerek yoktur. En güncel sürümü aşağıdaki bağlantıdan indirebilirsiniz:
+
+👉 **[Altai Music Downloader v1.2 İndir](https://github.com/Taka-source14/MusicDownload/releases)**  *(Açılan sayfada .exe dosyasına tıklayın)*
+
+---
+
+## �🚀 Adım Adım Kullanım Rehberi
 
 ### 1. Programı Çalıştırın
 `dist` klasörü içindeki **`altaysound-bot.exe`** dosyasına çift tıklayın. Karşınıza şık, renkli bir menü çıkacaktır.
