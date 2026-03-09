@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node download.js",
     "download": "node download.js",
-    "build": "pkg . --out-path ."
+    "build": "pkg . --out-path dist"
   },
   "bin": "download.js",
   "pkg": {
