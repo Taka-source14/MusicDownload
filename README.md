@@ -32,6 +32,7 @@ Program ilk açılışta yanına **`yardimci-araclar`** klasörünü çıkarır 
 
 ## 🛠 Bilmeniz Gerekenler
 
+*   **İndirme Konumu:** Müzikleriniz, **`.exe` dosyasını hangi klasöre koyduysanız doğrudan o klasöre** kaydedilir. Bu yüzden programı müziklerinizin birikmesini istediğiniz klasöre taşıyıp orada çalıştırmanız tavsiye edilir.
 *   **Tarayıcı Gerektirmez:** Artık tarayıcı ile uğraşmanıza gerek yok, her şey tek bir pencerede biter.
 *   **Bağımsızlık:** Python, Java veya başka bir ek yazılım kurmanıza gerek yoktur.
 *   **Hız ve Kararlılık:** Konsol arayüzü çok daha hızlıdır ve asla "buton çalışmadı" gibi hatalar vermez.
